@@ -3,9 +3,9 @@ const router = express.Router();
 const sql=require('mysql');
 // const addStudent = () => {};
 
-const {User,getUser,searchUser} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
-const {Todos,getTodos,deleteTodo,changeToDoStatus} = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
-const {Posts,getPosts,deletePost} = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
+const {User,getUser,searchUser} = require("/home/hilma/projects/databasechenandshir/dataBase/Users/user.js");
+const {Todos,getTodos,deleteTodo,changeToDoStatus} = require("/home/hilma/projects/databasechenandshir/dataBase/Todos/todos.js");
+const {Posts,getPosts,deletePost} = require("/home/hilma/projects/databasechenandshir/dataBase/Posts/post.js");
 // const Comment= require("../../dataBase/Comments/Comment");
 
 router.get("/", function (req, res, next) {
