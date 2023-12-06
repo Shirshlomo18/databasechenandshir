@@ -1,7 +1,7 @@
 {
     "table_name":"post",
     "id":"INT PRIMARY KEY AUTO_INCREMENT",
-    "user_id": "INT, FOREIGN KEY (user_id) REFERENCES users(id)",
+    "user_id": "INT, FOREIGN KEY (user_id) REFERENCES user(id)",
     "title": "VARCHAR(255)",
     "body": "VARCHAR(255)"
   }

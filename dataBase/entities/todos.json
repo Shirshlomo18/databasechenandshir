@@ -1,6 +1,7 @@
 {
-    "table_name":"password",
+    "table_name":"todos",
     "id":"INT PRIMARY KEY AUTO_INCREMENT",
     "user_id": "INT, FOREIGN KEY (user_id) REFERENCES user(id)",
-    "password":"VARCHAR(255)"
-}
+    "title": "VARCHAR(255)",
+    "completed": "BOOLEAN"
+  }
