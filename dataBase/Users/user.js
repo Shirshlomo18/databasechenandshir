@@ -35,6 +35,7 @@ const getUser= async (data)=>{
 console.log('data');
 
 }
+
 // const User = async (obj) => {
 //   console.log("Received data: ", obj);
 

@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const sql=require('mysql');
-const fs=require('fs');
 // const addStudent = () => {};
 
-const {User,getUser} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
-const Todos = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
-const Posts = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
+const {User,getUser} = require("/home/hilma/projects/databasechenandshir/dataBase/Users/user.js");
+const {Todos,deleteUser} = require("/home/hilma/projects/databasechenandshir/dataBase/Todos/todos.js");
+const {Posts,deletePost} = require("/home/hilma/projects/databasechenandshir/dataBase/Posts/post.js");
 // const Comment= require("../../dataBase/Comments/Comment");
 
 router.get("/", function (req, res, next) {
@@ -60,6 +59,8 @@ router.get('/post', function(req, res, next) {
       res.send(JSON.stringify(data));
     });
   });
+
+  
   
   module.exports = router;
   

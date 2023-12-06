@@ -32,4 +32,26 @@ const Todos = async (obj) => {
   }
 };
 
+const deleteTodo= async(obj)=>{
+  try {
+    // Wait for the connection to be established
+    await connect(); 
+
+    // Insert into the admin table
+    await queryAsync(
+      `DELETE FROM todos WHERE title = ?`,
+      [obj.title]
+    );
+
+    console.log("deleted successfully");
+    // Select from the admin table
+    return;
+  } catch (err) {
+    console.error("Error in Todos function:", err);
+    return { err };
+  }finally{
+    connection.end();
+  }
+}
+
 module.exports = Todos;

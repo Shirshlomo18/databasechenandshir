@@ -1,4 +1,4 @@
-const { connection,connect, queryAsync } = require("../help");
+const { connection, connect, queryAsync } = require("../help");
 const sql = require("mysql");
 
 const Posts = async (obj) => {
@@ -26,9 +26,34 @@ const Posts = async (obj) => {
   } catch (err) {
     console.error("Error in Post function:", err);
     return { err };
-  }finally{
+  } finally {
     connection.end();
   }
 };
+const deletePost = async(obj) => {
+  try {
+    // Wait for the connection to be established
+    await connect();
 
+    // Insert into the admin table
+    await queryAsync(
+      `DELETE FROM post WHERE title = ?`,
+      [obj.title]
+    );
+    
+    // await queryAsync(
+    //   `DELETE FROM comment WHERE post_id = ?`,
+    //   [obj.id]
+    // );
+
+    console.log("deleted successfully");
+    // Select from the admin table
+    return;
+  } catch (err) {
+    console.error("Error in Todos function:", err);
+    return { err };
+  } finally {
+    connection.end();
+  }
+}
 module.exports = Posts;
