@@ -1,17 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const sql=require('mysql');
-const fs=require('fs');
 // const addStudent = () => {};
 
-const {User,getUser} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
-const {Todos,getTodos} = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
-const {Posts,getPosts} = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
+const {User,getUser,searchUser} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
+const {Todos,getTodos,deleteTodo,changeToDoStatus} = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
+const {Posts,getPosts,deletePost} = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
 // const Comment= require("../../dataBase/Comments/Comment");
 
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
+
+router.post("/login", function (req, res, next) {
+  searchUser(body).then((data) => {
+    console.log("data: ", data);
+    if(typeof data === "string"){
+      res.status(404)
+      res.send("user not found or wrong password")
+    }
+    res.send(JSON.stringify(data));
+  });
+});
+
 router.get("/user", function (req, res, next) {
   getUser().then((data) => {
     console.log("data: ", data);
@@ -63,6 +74,34 @@ router.get("/post", function (req, res, next) {
       res.send(JSON.stringify(data));
     });
   });
+
+  router.put("/todos", function (req, res, next) {
+    const body = req.body;
+    console.log("body: ", body);
+    changeToDoStatus(body).then((data) => {
+      console.log("data: ", data);
+      res.send(JSON.stringify(data));
+    });
+  });
+
+  router.delete("/post", function (req, res, next) {
+    const body = req.body;
+    console.log("body: ", body);
+    deletePost(body).then((data) => {
+      console.log("data: ", data);
+      res.send(JSON.stringify(data));
+    });
+  });
+
+  router.delete("/todos", function (req, res, next) {
+    const body = req.body;
+    console.log("body: ", body);
+    deleteTodo(body).then((data) => {
+      console.log("data: ", data);
+      res.send(JSON.stringify(data));
+    });
+  });
+  
   
   module.exports = router;
   

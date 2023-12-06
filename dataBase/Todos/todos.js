@@ -44,4 +44,52 @@ const getTodos= async () => {
     return { err };
   }
 };
-module.exports = {Todos:Todos, getTodos:getTodos};
+const deleteTodo= async(obj)=>{
+  try {
+    // Wait for the connection to be established
+    await connect(); 
+    
+    // delete the todo from db
+    await queryAsync(
+      `DELETE FROM todos WHERE title = ?`,
+      [obj.title]
+      );
+      
+      console.log("deleted successfully");
+      // Select from the admin table
+    return 200;
+  } catch (err) {
+    console.error("Error in DeleteTodo function:", err);
+    return { err };
+  }finally{
+    connection.end();
+  }
+}
+
+const changeToDoStatus = async(obj)=>{
+  try {
+    // Wait for the connection to be established
+    await connect(); 
+
+    // Insert into the admin table
+    await queryAsync(
+      `UPDATE todos SET completed = ?`,
+      [!obj.completed]
+      );
+      
+      // Select from the admin table
+      const result = await queryAsync(`SELECT * FROM todos WHERE name = ?`, 
+      [obj.name,]
+      );
+      
+      console.log("result: ", result);
+      return result;
+    } catch (err) {
+      console.error("Error in changeTodoStatus function:", err);
+      return { err };
+    }finally{
+      connection.end();
+    }
+  }
+  
+  module.exports = {Todos:Todos, getTodos:getTodos,deleteTodo:deleteTodo,changeToDoStatus:changeToDoStatus};
