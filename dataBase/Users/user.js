@@ -81,27 +81,41 @@ const searchUser = async(obj)=>{
     connection.end();
   }
 }
-module.exports = {User: User , getUser:getUser,searchUser:searchUser};
 
-// const User = async (obj) => {
-  //   console.log("Received data: ", obj);
-  
-  //   try {
-    //     await connect();
+const changeUserInfo = async (obj) => {
+  try {
+    await connect();
 
-//     const sqlQuery = `INSERT INTO user (name, email, phone) VALUES (?, ?, ?)`;
-//     console.log("SQL Query: ", sqlQuery);
+    // Use parameterized queries to prevent SQL injection
+    const updateQuery = 'UPDATE user SET name=?, email=?, phone=? WHERE id=?';
+    const result = await queryAsync(updateQuery, [
+      obj.name,
+      obj.email,
+      obj.phone,
+      obj.id,
+    ]);
 
-//     await queryAsync(sqlQuery, [obj.name, obj.email, obj.phone]);
-//     console.log("Insert successful");
+    // Check if any rows were affected by the update
+    if (result.affectedRows === 0) {
+      console.log("No user found for the provided ID");
+      throw new Error("No user found for the provided ID");
+    }
 
-//     const result = await queryAsync(`SELECT * FROM user WHERE name = ?`, [obj.name]);
-//     console.log("Result: ", result);
+    // Retrieve the updated user
+    const updatedUserQuery = 'SELECT * FROM user WHERE id = ?';
+    const updatedUser = await queryAsync(updatedUserQuery, [obj.id]);
 
-//     return result;
-//   } catch (err) {
-//     console.error("Error in User function:", err);
-//     return { error: err.message };
-//   }
-// };
+    if (!updatedUser.length) {
+      console.log("No user found after update");
+      throw new Error("No user found after update");
+    }
+
+    return result;
+  } catch (err) {
+    console.error("Error updating user:", err);
+    throw err;
+  }
+};
+
+module.exports = {User: User , getUser:getUser,searchUser:searchUser,changeUserInfo:changeUserInfo};
 

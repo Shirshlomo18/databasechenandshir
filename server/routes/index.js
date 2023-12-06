@@ -3,7 +3,7 @@ const router = express.Router();
 const sql=require('mysql');
 // const addStudent = () => {};
 
-const {User,getUser,searchUser} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
+const {User,getUser,searchUser,changeUserInfo} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
 const {Todos,getTodos,deleteTodo,changeToDoStatus} = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
 const {Posts,getPosts,deletePost} = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
 // const Comment= require("../../dataBase/Comments/Comment");
@@ -32,12 +32,26 @@ router.get("/user", function (req, res, next) {
     res.send(JSON.stringify(data));
   });
 });
-router.get("/todos", function (req, res, next) {
-  getTodos().then((data) => {
-    console.log("data: ", data);
-    res.send(JSON.stringify(data));
-  });
+// router.get("todos?userId=${currUser.id}", function (req, res, next) {
+//   getTodos().then((data) => {
+//     console.log("data: ", data);
+//     res.send(JSON.stringify(data));
+//   });
+// });
+router.get("/todos/:userId", function (req, res, next) {
+  const userId = req.params.userId;
+
+  getTodos(userId)
+    .then((data) => {
+      console.log("data: ", data);
+      res.send(JSON.stringify(data));
+    })
+    .catch((error) => {
+      console.error("Error fetching todos:", error);
+      res.status(500).send("Internal Server Error");
+    });
 });
+
 router.get("/post", function (req, res, next) {
   getPosts().then((data) => {
     console.log("data: ", data);
@@ -87,6 +101,14 @@ router.get("/post", function (req, res, next) {
     });
   });
 
+  router.put("/info", function (req, res, next) {
+    const body = req.body;
+    console.log("body: ", body);
+    changeUserInfo(body).then((data) => {
+      console.log("data: ", data);
+      res.send(JSON.stringify(data));
+    });
+  });
   router.delete("/post", function (req, res, next) {
     const body = req.body;
     console.log("body: ", body);
