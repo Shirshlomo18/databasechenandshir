@@ -31,5 +31,17 @@ const Todos = async (obj) => {
     connection.end();
   }
 };
+const getTodos= async () => {
+  try {
+    await connect(); // Wait for the connection to be established
 
-module.exports = Todos;
+    // Insert into the admin table
+    const result = await queryAsync(`SELECT * FROM todos`);
+    console.log("result: ", result);
+    return result;
+  } catch (err) {
+    console.error("Error in Todos function:", err);
+    return { err };
+  }
+};
+module.exports = {Todos:Todos, getTodos:getTodos};

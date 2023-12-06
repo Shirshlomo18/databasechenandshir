@@ -31,30 +31,17 @@ const User = async (obj) => {
     connection.end();
   }
 };
-const getUser= async (data)=>{
-console.log('data');
+const getUser = async () => {
+  try {
+    await connect(); // Wait for the connection to be established
 
-}
-// const User = async (obj) => {
-//   console.log("Received data: ", obj);
-
-//   try {
-//     await connect();
-
-//     const sqlQuery = `INSERT INTO user (name, email, phone) VALUES (?, ?, ?)`;
-//     console.log("SQL Query: ", sqlQuery);
-
-//     await queryAsync(sqlQuery, [obj.name, obj.email, obj.phone]);
-//     console.log("Insert successful");
-
-//     const result = await queryAsync(`SELECT * FROM user WHERE name = ?`, [obj.name]);
-//     console.log("Result: ", result);
-
-//     return result;
-//   } catch (err) {
-//     console.error("Error in User function:", err);
-//     return { error: err.message };
-//   }
-// };
-
-module.exports = User;
+    // Insert into the admin table
+    const result = await queryAsync(`SELECT * FROM user`);
+    console.log("result: ", result);
+    return result;
+  } catch (err) {
+    console.error("Error in User function:", err);
+    return { err };
+  }
+};
+module.exports = {User: User , getUser:getUser};

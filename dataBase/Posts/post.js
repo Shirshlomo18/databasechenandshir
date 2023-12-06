@@ -30,5 +30,17 @@ const Posts = async (obj) => {
     connection.end();
   }
 };
+const getPosts= async () => {
+  try {
+    await connect(); // Wait for the connection to be established
 
-module.exports = Posts;
+    // Insert into the admin table
+    const result = await queryAsync(`SELECT * FROM post`);
+    console.log("result: ", result);
+    return result;
+  } catch (err) {
+    console.error("Error in Posts function:", err);
+    return { err };
+  }
+};
+module.exports = {Posts:Posts,getPosts:getPosts};

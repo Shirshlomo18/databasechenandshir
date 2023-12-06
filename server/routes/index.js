@@ -5,27 +5,30 @@ const fs=require('fs');
 // const addStudent = () => {};
 
 const {User,getUser} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
-const Todos = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
-const Posts = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
+const {Todos,getTodos} = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
+const {Posts,getPosts} = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
 // const Comment= require("../../dataBase/Comments/Comment");
 
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 router.get("/user", function (req, res, next) {
-  getStudent(body).then((data) => {
+  getUser().then((data) => {
     console.log("data: ", data);
     res.send(JSON.stringify(data));
   });
 });
-// router.get('/user', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-router.get('/todos', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/todos", function (req, res, next) {
+  getTodos().then((data) => {
+    console.log("data: ", data);
+    res.send(JSON.stringify(data));
+  });
 });
-router.get('/post', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/post", function (req, res, next) {
+  getPosts().then((data) => {
+    console.log("data: ", data);
+    res.send(JSON.stringify(data));
+  });
 });
 
   router.post("/todos", function (req, res, next) {
