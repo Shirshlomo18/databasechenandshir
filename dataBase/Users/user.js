@@ -7,7 +7,7 @@ const User = async (obj) => {
   console.log("User");
 
   try {
-    await connect(); // Wait for the connection to be established
+    // await connect(); // Wait for the connection to be established
 
     // Insert into the admin table
     await queryAsync(
@@ -31,12 +31,12 @@ const User = async (obj) => {
     console.error("Error in User function:", err);
     return { err };
   }finally{
-    connection.end();
+    // connection.end();
   }
 };
 const getUser = async () => {
   try {
-    await connect(); // Wait for the connection to be established
+    // await connect(); // Wait for the connection to be established
 
     // Insert into the admin table
     const result = await queryAsync(`SELECT * FROM user`);
@@ -51,7 +51,7 @@ const getUser = async () => {
 
 const searchUser = async(obj)=>{
   try {
-    await connect(); // Wait for the connection to be established
+    // await connect(); // Wait for the connection to be established
 
     // select
     const result = await queryAsync(`SELECT * FROM user WHERE name = ?`, [
@@ -78,7 +78,7 @@ const searchUser = async(obj)=>{
   console.error("Error in User function:", err);
     return { err };
   }finally{
-    connection.end();
+    // connection.end();
   }
 }
 module.exports = {User: User , getUser:getUser,searchUser:searchUser};

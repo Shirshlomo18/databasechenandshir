@@ -7,7 +7,7 @@ const Todos = async (obj) => {
   console.log("Todos");
 
   try {
-    await connect(); // Wait for the connection to be established
+    // await connect(); // Wait for the connection to be established
 
     // Insert into the admin table
     await queryAsync(
@@ -28,12 +28,12 @@ const Todos = async (obj) => {
     console.error("Error in Todos function:", err);
     return { err };
   }finally{
-    connection.end();
+    // connection.end();
   }
 };
 const getTodos= async () => {
   try {
-    await connect(); // Wait for the connection to be established
+    // await connect(); // Wait for the connection to be established
 
     // Insert into the admin table
     const result = await queryAsync(`SELECT * FROM todos`);
@@ -47,7 +47,7 @@ const getTodos= async () => {
 const deleteTodo= async(obj)=>{
   try {
     // Wait for the connection to be established
-    await connect(); 
+    // await connect(); 
     
     // delete the todo from db
     await queryAsync(
@@ -62,14 +62,14 @@ const deleteTodo= async(obj)=>{
     console.error("Error in DeleteTodo function:", err);
     return { err };
   }finally{
-    connection.end();
+    // connection.end();
   }
 }
 
 const changeToDoStatus = async(obj)=>{
   try {
     // Wait for the connection to be established
-    await connect(); 
+    // await connect(); 
 
     // Insert into the admin table
     await queryAsync(
@@ -88,7 +88,7 @@ const changeToDoStatus = async(obj)=>{
       console.error("Error in changeTodoStatus function:", err);
       return { err };
     }finally{
-      connection.end();
+      // connection.end();
     }
   }
   

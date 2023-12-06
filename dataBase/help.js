@@ -10,8 +10,10 @@ const queryAsync = (sql, values) => {
   return new Promise((resolve, reject) => {
     connection.query(sql, values, (err, results) => {
       if (err) {
+        // connection.end();
         reject(err);
       } else {
+        // connection.end();
         resolve(results);
       }
     });
@@ -23,8 +25,10 @@ const connect = () => {
   return new Promise((resolve, reject) => {
     connection.connect((err) => {
       if (err) {
+        // connection.end()
         reject(err);
       } else {
+        // connection.end()
         resolve();
       }
     });

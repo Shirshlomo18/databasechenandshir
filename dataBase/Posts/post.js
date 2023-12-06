@@ -2,11 +2,8 @@ const { connection, connect, queryAsync } = require("../help");
 const sql = require("mysql");
 
 const Posts = async (obj) => {
-  console.log("obj: ", obj);
-  console.log("Posts");
-
   try {
-    await connect(); // Wait for the connection to be established
+    // await connect(); // Wait for the connection to be established
 
     // Insert into the admin table
     await queryAsync(
@@ -20,6 +17,7 @@ const Posts = async (obj) => {
     const result = await queryAsync(`SELECT * FROM post`, [
       obj.name,
     ]);
+    // connection.end();
 
     console.log("result: ", result);
     return result;
@@ -27,12 +25,13 @@ const Posts = async (obj) => {
     console.error("Error in Post function:", err);
     return { err };
   } finally {
-    connection.end();
+    // connection.end();
   }
 };
+
 const getPosts= async () => {
   try {
-    await connect(); // Wait for the connection to be established
+    // await connect(); // Wait for the connection to be established
 
     // Insert into the admin table
     const result = await queryAsync(`SELECT * FROM post`);
@@ -46,7 +45,7 @@ const getPosts= async () => {
 const deletePost = async(obj) => {
   try {
     // Wait for the connection to be established
-    await connect();
+    // await connect();
     
     // Insert into the admin table
     await queryAsync(
@@ -64,9 +63,9 @@ const deletePost = async(obj) => {
     return 200;
   } catch (err) {
     console.error("Error in deletePost function:", err);
-    return { err };
+    return 500;
   } finally {
-    connection.end();
+    // connection.end();
   }
 }
 module.exports = {Posts:Posts,getPosts:getPosts, deletePost:deletePost};

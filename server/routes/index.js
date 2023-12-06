@@ -93,15 +93,16 @@ router.get("/post", function (req, res, next) {
     deletePost(body).then((data) => {
       console.log("data: ", data);
       res.send(JSON.stringify(data));
-    });
+    }).catch((err)=>{res.status(404);res.send(err)})
   });
 
   router.delete("/todos", function (req, res, next) {
     const body = req.body;
     console.log("body: ", body);
     deleteTodo(body).then((data) => {
-      console.log("data: ", data);
-      res.send(JSON.stringify(data));
+      res.status(data)
+      // console.log("data: ", data);
+      // res.send(JSON.stringify(data));
     });
   });
   
