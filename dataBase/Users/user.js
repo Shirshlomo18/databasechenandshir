@@ -19,8 +19,8 @@ const User = async (obj) => {
       obj.name,
     ]);
     await queryAsync(
-      `INSERT INTO password (user_id,password) VALUES (?, ?,)`,
-      [result.id,obj.password]
+      `INSERT INTO password (user_id,password) VALUES (?, ?)`,
+      [result[0].id,obj.password]
     );
     console.log("insert successfully");
 
@@ -57,17 +57,21 @@ const searchUser = async(obj)=>{
     const result = await queryAsync(`SELECT * FROM user WHERE name = ?`, [
       obj.name,
     ]);
-    
+    if(!result.length) throw err
+    console.log("user we are ooki ng for is ",result)
     const userPassword = await queryAsync(`SELECT * FROM password WHERE user_id=?`,
-    [result.id]);
-    
-  if (userPassword.password === obj.password){
+    [result[0].id]);
+    console.log("user is ",userPassword)
+    if(!userPassword.length) {
+      console.log("no user found")
+      throw(err);
+    }
+  if (userPassword[0].password == obj.password){
     return result;
   }
   
   else{
-    res.status(404)
-    return('user not found or wrong password')
+    throw err;
   }
 
 } catch (err) {
