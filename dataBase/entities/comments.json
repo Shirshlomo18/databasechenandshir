@@ -1,0 +1,7 @@
+{
+    "table_name": "comment",
+    "id":"INT PRIMARY KEY AUTO_INCREMENT",
+    "post_id": "INT, FOREIGN KEY (post_id) REFERENCES post(id)",
+    "body": "VARCHAR(255)",
+    "email": "VARCHAR(255)" 
+}
