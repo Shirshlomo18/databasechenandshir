@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const sql=require('mysql');
+const fs=require('fs');
+// const addStudent = () => {};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,3 +11,4 @@ router.get('/', function(req, res, next) {
 
 
 module.exports = router;
+
