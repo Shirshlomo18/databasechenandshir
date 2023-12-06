@@ -12,13 +12,14 @@ const con = mysql.createConnection({
 })
 
 
-const files = fs.readdirSync("/home/hilma/projects/databasechenandshir/dataBase/entities/")
+const files = fs.readdirSync("/home/hilma/databasechenandshir/dataBase/entities/")
 
 con.connect((err) => {
+       
     if (err) throw err;
     files.forEach(async file => {
-        const fileContent = await JSON.parse(fs.readFileSync("/home/hilma/projects/databasechenandshir/dataBase/entities/" + file).toString());
-        let sql = `CREATE TABLE ${fileContent.table_name} (`
+        const fileContent = await JSON.parse(fs.readFileSync("/home/hilma/databasechenandshir/dataBase/entities/" + file).toString());
+        let sql = `CREATE TABLE IF NOT EXISTS ${fileContent.table_name} (`
 
         for (let key in fileContent) {
             if (key !== "table_name") {
@@ -29,6 +30,21 @@ con.connect((err) => {
             if (err) throw err;
         })
     });
+    // con.query("CREATE DATABASE IF NOT EXISTS DB", (err) => {
+    //     if (err) {
+    //       console.log("err in creating DB", err);
+    //       return;
+    //     }
+    
+    //     console.log("Database 'DB' created or already exists");
+    
+    //     // Switch to the 'DB' database
+    //     connection.query("USE DB", (err) => {
+    //       if (err) {
+    //         console.log("err connecting to DB:", err);
+    //         return;
+    //       }
+    //     }) 
 })
 
 module.exports = router;
