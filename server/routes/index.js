@@ -12,15 +12,18 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-router.post("/login", function (req, res, next) {
-  searchUser(body).then((data) => {
+router.post("/login", async function (req, res, next) {
+  const body = req.body;
+ searchUser(body).then((data) => {
     console.log("data: ", data);
-    if(typeof data === "string"){
+    if(data.err){
       res.status(404)
       res.send("user not found or wrong password")
+      return
     }
     res.send(JSON.stringify(data));
-  });
+    // res.end();
+  }).catch((err)=>{res.status(500); res.send(err)});
 });
 
 router.get("/user", function (req, res, next) {

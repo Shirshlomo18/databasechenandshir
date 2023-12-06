@@ -1,20 +1,29 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 function Login(){
-
+const [username,setUsername]=useState('');
+const [password,setPassword]=useState('');
+ const navigate=useNavigate();
+function onInputChange(e, setFunction) {
+    setFunction(e.target.value);
+  }
     const handleSubmit= async (e)=>{
-
+        if(!username || !password){
+            alert("please fill all fields")
+            return
+        }
         const enteredUsername=e.target.username.value;
         const enteredPassword=e.target.password.value;
         e.preventDefault();
         try {
-            const response = await fetch('localhost:3000/login', {
+            const response = await fetch('http://localhost:3000/login', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ username: enteredUsername, password: enteredPassword }),
+              body: JSON.stringify({ name: enteredUsername, password: enteredPassword }),
             });
+            console.log(response);
             if (response.ok) {
                 const userData = await response.json();
                 localStorage.setItem('currUser', JSON.stringify(userData));
@@ -27,22 +36,9 @@ function Login(){
               alert('An error occurred during login');
             }
     }
-        // let entered = false;
-
-        // for (let i = 0; i < data.length; i++) {
-        //   if (enteredUsername == && enteredPassword == data[i].website) {
-        //     navigate("/home");
-        //     entered = true;
-        //     localStorage.setItem("currUser", JSON.stringify(data[i]));
-        //   }
-        // }
-        // if (!entered) {
-        //   alert("Invalid username or password");
-        //   navigate(".");
-        // }
     
- return(
-    <>
+    return(
+        <>
       <form onSubmit={handleSubmit} className="form">
         <h1>Log in</h1>
         <label htmlFor="username">Username: </label>
@@ -66,3 +62,16 @@ function Login(){
   );
 }
 export default Login;
+// let entered = false;
+
+// for (let i = 0; i < data.length; i++) {
+//   if (enteredUsername == && enteredPassword == data[i].website) {
+//     navigate("/home");
+//     entered = true;
+//     localStorage.setItem("currUser", JSON.stringify(data[i]));
+//   }
+// }
+// if (!entered) {
+//   alert("Invalid username or password");
+//   navigate(".");
+// }
