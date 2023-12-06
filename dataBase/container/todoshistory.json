@@ -2,7 +2,7 @@
     "table_name": "todo_history",
     "todo_id": "INT, FOREIGN KEY (todo_id) REFERENCES todo(id)",
     "id":"INT PRIMARY KEY AUTO_INCREMENT",
-    "user_id": "INT FOREIGN KEY (user_id) REFERENCES user(id)",
-    "title": "VARCHAR(255) FOREIGN KEY (title) REFERENCES todo(title)",
+    "user_id": "INT, FOREIGN KEY (user_id) REFERENCES user(id)",
+    "title_his": "VARCHAR(255), FOREIGN KEY (title_his) REFERENCES todos(title)",
     "completed":"BOOLEAN FOREIGN KEY (completed) REFERENCES todo(completed)"
 }
