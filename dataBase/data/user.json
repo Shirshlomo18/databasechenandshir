@@ -1,0 +1,56 @@
+{
+    "properties": ["name","email","phone"],
+    "data": [
+        {
+          "name": "Leanne Graham",
+          "email": "Sincere@april.biz",
+          "phone": 1770736803
+        },
+        {
+          "name": "Ervin Howell",
+          "email": "Shanna@melissa.tv",
+          "phone": 106926593
+        },
+        {
+          "name": "Clementine Bauch",
+          "email": "Nathan@yesenia.net",
+          "phone": 1463123444
+        },
+        {
+          "name": "Patricia Lebsack",
+          "email": "Julianne.OConner@kory.org",
+          "phone": 493170962
+        },
+        {
+          "name": "Chelsey Dietrich",
+          "email": "Lucio_Hettinger@annie.ca",
+          "phone": 254954128
+        },
+        {
+          "name": "Mrs. Dennis Schulist",
+          "email": "Karley_Dach@jasper.info",
+          "phone": 1477935847
+        },
+        {
+          "name": "Kurtis Weissnat",
+          "email": "Telly.Hoeger@billy.biz",
+          "phone": 210067613
+        },
+        {
+          "name": "Nicholas Runolfsdottir V",
+          "email": "Sherwood@rosamond.me",
+          "phone": 586493694
+        },
+        {
+          "name": "Glenna Reichert",
+          "email": "Chaim_McDermott@dana.io",
+          "phone": 775976679
+        },
+        {
+          "name": "Clementina DuBuque",
+          "email": "Rey.Padberg@karina.biz",
+          "phone": 246483804
+        }
+      ]
+
+}

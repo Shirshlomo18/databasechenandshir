@@ -8,5 +8,11 @@ const con = mysql.createConnection({
 })
 
 function getFromDB(sql){
-    con.connect
+    con.connect((err) => {
+        if (err) throw err;
+        con.query(sql, (err) => {
+            if (err) throw err;
+            return(result)
+        })
+    })
 }
