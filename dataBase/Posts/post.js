@@ -40,7 +40,7 @@ const deletePost = async(obj) => {
       `DELETE FROM post WHERE title = ?`,
       [obj.title]
     );
-    
+
     // await queryAsync(
     //   `DELETE FROM comment WHERE post_id = ?`,
     //   [obj.id]
@@ -48,9 +48,9 @@ const deletePost = async(obj) => {
 
     console.log("deleted successfully");
     // Select from the admin table
-    return;
+    return 200;
   } catch (err) {
-    console.error("Error in Todos function:", err);
+    console.error("Error in deletePost function:", err);
     return { err };
   } finally {
     connection.end();
