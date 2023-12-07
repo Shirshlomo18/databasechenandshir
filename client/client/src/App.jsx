@@ -9,7 +9,6 @@ import Home from "./components/home";
 import Todos from "./components/todos";
 import Posts from "./components/posts";
 import Info from "./components/info";
-import Logout from "./components/logout";
 
 function App() {
   return (
@@ -21,9 +20,9 @@ function App() {
                 {/* </Route> */}
                 {/* <Route path="todos" element={<Todos />} /> */}
                 <Route path="*" element={<Notfound />} />
-                <Route path="todos" element={<Todos />} />
+                <Route path="todos/:userId" element={<Todos />} />
                 <Route path="posts" element={<Posts />} />
-                <Route path="logout" element={<Logout />} />
+                <Route path="logout" element={<Login />} />
                 <Route path="info" element={<Info />} />
         </Routes>
     </>
