@@ -42,15 +42,15 @@ const getPosts= async () => {
     return { err };
   }
 };
-const deletePost = async(obj) => {
+const deletePost = async(id) => {
   try {
     // Wait for the connection to be established
     // await connect();
     
     // Insert into the admin table
     await queryAsync(
-      `DELETE FROM post WHERE title = ?`,
-      [obj.title]
+      `DELETE FROM post WHERE id = ?`,
+      [id]
     );
     
     // await queryAsync(

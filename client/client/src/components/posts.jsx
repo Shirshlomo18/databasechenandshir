@@ -40,9 +40,34 @@ function Posts() {
             console.error('Error adding new item:', error);
         }
     };
+    function deletePost(id) {
+        fetch(`http://localhost:3000/post/${id}`, {
+            method: "DELETE", headers: {
+                "Content-Type": "application/json",
+            }
+        }).then((result) => { 
+            if (result.status == 200) { 
+                setPostsArr((prev)=> prev.filter((post)=> post.id !== id));
+                alert("deleted successfully"); 
+                return;
+            } 
+            else{
+                alert("something went wrong:(")
+                return;
+            }
+        })
+    }
     if (!Array.isArray(postsArr)) {
         return (
-            <div>an error happened</div>
+            <div>an error happened</div>)
+      };
+    // const [postsArr,setPostsArr] = useState([]);
+    // useEffect(()=>{
+    //     fetch("http://localhost:3000/post").then((result)=>result.json()).then((data)=>setPostsArr(data))
+    // },[])
+    if (postsArr.length === 0){
+        return(
+            <div>loading...</div>
         )
     }
 
@@ -70,7 +95,7 @@ function Posts() {
                     <button type="submit">Submit</button>
                 </form>
             )}
-            {postsArr.map((post) => <Post key={post.id} details={post} />)}
+            {postsArr.map((post) => <Post key={post.id} details={post}  deletePost={()=>deletePost(post.id)}/>)}
         </>)
 
 }
