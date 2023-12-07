@@ -39,7 +39,7 @@ function onInputChange(e, setFunction) {
     
     return(
         <>
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={handleSubmit} className="form" >
         <h1>Log in</h1>
         <label htmlFor="username">Username: </label>
         <input

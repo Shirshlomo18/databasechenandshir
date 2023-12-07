@@ -68,8 +68,8 @@ const deleteTodo= async(obj)=>{
     
     // delete the todo from db
     await queryAsync(
-      `DELETE FROM todos WHERE title = ?`,
-      [obj.title]
+      `DELETE FROM todos WHERE id = ?`,
+      [obj.id]
       );
       
       console.log("deleted successfully");
@@ -110,5 +110,4 @@ const changeToDoStatus = async(obj)=>{
   }
   
   module.exports = {Todos:Todos, getTodos:getTodos,deleteTodo:deleteTodo,changeToDoStatus:changeToDoStatus};
-
       // module.exports = { Todos, getTodos, deleteTodo, changeToDoStatus };

@@ -203,7 +203,7 @@ export function Todos() {
       setTodos(result);
       setFilteredTodos(result);
     } catch (error) {
-      console.log('Error fetching todos:', error);
+      console.error('Error fetching todos:', error);
     }
   };
 

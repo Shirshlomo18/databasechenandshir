@@ -6,6 +6,7 @@ const sql=require('mysql');
 const {User,getUser,searchUser,changeUserInfo} = require("/home/hilma/databasechenandshir/dataBase/Users/user.js");
 const {Todos,getTodos,deleteTodo,changeToDoStatus} = require("/home/hilma/databasechenandshir/dataBase/Todos/todos.js");
 const {Posts,getPosts,deletePost} = require("/home/hilma/databasechenandshir/dataBase/Posts/post.js");
+const { useParams } = require('react-router-dom');
 // const Comment= require("../../dataBase/Comments/Comment");
 
 router.get("/", function (req, res, next) {
@@ -32,26 +33,25 @@ router.get("/user", function (req, res, next) {
     res.send(JSON.stringify(data));
   });
 });
-// router.get("todos?userId=${currUser.id}", function (req, res, next) {
+// router.get("todos?userId=${currentUser.id}", function (req, res, next) {
 //   getTodos().then((data) => {
 //     console.log("data: ", data);
 //     res.send(JSON.stringify(data));
 //   });
 // });
-router.get("/todos/:userId", function (req, res, next) {
-  const userId = req.params.userId;
+// router.get("/todos/:userId", function (req, res, next) {
+//   const userId = req.params.userId;
 
-  getTodos(userId)
-    .then((data) => {
-      console.log("data: ", data);
-      res.send(JSON.stringify(data));
-    })
-    .catch((error) => {
-      console.error("Error fetching todos:", error);
-      res.status(500).send("Internal Server Error");
-    });
-});
-
+//   getTodos(userId)
+//     .then((data) => {
+//       console.log("data: ", data);
+//       res.send(JSON.stringify(data));
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching todos:", error);
+//       res.status(500).send("Internal Server Error");
+//     });
+// });
 router.get("/post", function (req, res, next) {
   getPosts().then((data) => {
     console.log("data: ", data);
@@ -109,19 +109,20 @@ router.get("/post", function (req, res, next) {
       res.send(JSON.stringify(data));
     });
   });
-  router.delete("/post", function (req, res, next) {
-    const body = req.body;
-    console.log("body: ", body);
-    deletePost(body).then((data) => {
+  
+  router.delete("/post/:id", function (req, res, next) {
+    const id= req.url.id;
+    console.log("id: ", id);
+    deletePost(id).then((data) => {
       console.log("data: ", data);
       res.send(JSON.stringify(data));
     });
   });
 
-  router.delete("/todos", function (req, res, next) {
-    const body = req.body;
-    console.log("body: ", body);
-    deleteTodo(body).then((data) => {
+  router.delete("/todos/:id", function (req, res, next) {
+    const id=req.url.id;
+    console.log("id: ", id);
+    deleteTodo(id).then((data) => {
       console.log("data: ", data);
       res.send(JSON.stringify(data));
     });
